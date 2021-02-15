@@ -7,15 +7,12 @@ export const initialState = {
         },
         content: "첫 번째 게시글 #해시태그, #해시태그22",
         Images: [{
-                src: "https://github.com/jina95/TIL/blob/master/images/actions%20%EB%A1%9C%20%EB%84%98%EA%B8%B4%20%EC%BD%94%EB%93%9C.png"
-            },
-            {
-                src: "https://github.com/jina95/TIL/blob/master/images/%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B4%80%EC%A0%901.png"
-            },
-            {
-                src: "https://github.com/jina95/TIL/blob/master/images/%EB%8F%84%EC%84%9C/3way%EB%B3%91%ED%95%A9.png"
-            }
-        ],
+        src: 'https://bookthumb-phinf.pstatic.net/cover/137/995/13799585.jpg?udate=20180726',
+        }, {
+        src: 'https://gimg.gilbut.co.kr/book/BN001958/rn_view_BN001958.jpg',
+        }, {
+        src: 'https://gimg.gilbut.co.kr/book/BN001998/rn_view_BN001998.jpg',
+        }],
         Comments: [{
             User: {
                 nickname: "HH",
