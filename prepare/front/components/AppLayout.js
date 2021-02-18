@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import { Row, Col, Input, Menu } from "antd"
 import { useSelector } from "react-redux"
+
 
 import LoginForm from "./LoginForm"
 import UserProfile from "./UserProfile"
@@ -15,6 +16,19 @@ const SearcInput = styled(Input.Search)`
     vertical-align = middle;
 `
 
+const Global = createGlobalStyle`
+    .ant-row {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+    .ant-col:first-child {
+        padding-left: 0 !important;
+    }
+    .ant-col:last-child {
+        padding-right: 0 !important;
+    }
+`
+
 const AppLayout = ({children}) => {
     // const [ isLoggedIn, setIsLoggedIn ] = useState(false)
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
@@ -23,6 +37,7 @@ const AppLayout = ({children}) => {
 
     return (
         <div>
+            <Global />
             <Menu mode="horizontal">
                 {/* a -> href 가 아닌 link -> href */}
                 <Menu.Item>

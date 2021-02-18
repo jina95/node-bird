@@ -1,15 +1,22 @@
 import { createWrapper } from "next-redux-wrapper";
 import { applyMiddleware, compose, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension"
+import createSagaMiddleware from "redux-saga"
 
-import reducer from "../reducers/index"
+import reducer from "../reducers"
+import rootSaga from "../sagas";
 
-// configureStore.js
+
+
+
+
 const configureStore = () => {
+    const sagaMiddleware = createSagaMiddleware()
     // 배포용일때는 devtool 을 연결 안하고, 개발모드일때만 히스토리가 남는 devtool 연결
-    const middlewares = []
+    const middlewares = [sagaMiddleware]
     const enhancer = process.env.NODE_ENV === 'production' ? compose(applyMiddleware(...middlewares)): composeWithDevTools(applyMiddleware(...middlewares))
     const store = createStore(reducer, enhancer);
+    store.sagaTask = sagaMiddleware.run(rootSaga)
     return store;
 }
 
