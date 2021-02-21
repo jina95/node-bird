@@ -31,7 +31,7 @@ const Global = createGlobalStyle`
 
 const AppLayout = ({children}) => {
     // const [ isLoggedIn, setIsLoggedIn ] = useState(false)
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
+    const { me } = useSelector((state) => state.user)
 
     // const style = useMemo(() => ({ verticalAlign:  "middle"}), [])
 
@@ -57,7 +57,7 @@ const AppLayout = ({children}) => {
             {/* gutter -> 컬럼간의 간격 */}
             <Row gutter={8}>
                 <Col xs={24} md={6}>
-                    {isLoggedIn? <UserProfile /> : <LoginForm />}
+                    {me? <UserProfile /> : <LoginForm />}
                 </Col>
                 <Col xs={24} md={12}>{children}</Col>
                 <Col xs={24} md={6}>

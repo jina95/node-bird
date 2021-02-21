@@ -8,13 +8,13 @@ import PostCard from "../components/PostCard";
 
 
 const Home = () => {
-    const { isLoggedIn } = useSelector((state) => state.user)
+    const { me } = useSelector((state) => state.user)
     const { mainPost } = useSelector((state) => state.post)
 
     // AppLayout 내에 감싸진애들이 children 이 된다.
     return (
         <AppLayout>
-            { isLoggedIn &&  <PostForm />}
+            { me &&  <PostForm />}
             { mainPost.map((post) => <PostCard key={post.id} post={post} />)}
             
         </AppLayout>

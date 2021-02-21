@@ -4,13 +4,18 @@ import AppLayout from "../components/AppLayout"
 import { Form, Input, Checkbox, Button } from "antd";
 import styled from "styled-components"
 import useInput from "../components/hooks/useInput";
+import { useDispatch, useSelector } from "react-redux";
+import { SIGN_UP_REQUEST } from "../reducers/user";
 
 const ErroMessage = styled.div`
     color: red;
 `
 
 const Signup = () => {
-    const [ id, onChangeId ] = useInput("")
+    const dispatch = useDispatch()
+    const { signUpLoading } = useSelector((state) => state.user)
+
+    const [ email, onChangeEmail ] = useInput("")
     const [ nickname, onChangeNickname ] = useInput("")
     const [ password, onChangePassword ] = useInput("")
 
@@ -37,7 +42,11 @@ const Signup = () => {
         if(!term){
             return setTermError(true)
         }
-        console.log(id, password, nickname)
+        console.log(email, password, nickname)
+        dispatch({
+            type:SIGN_UP_REQUEST,
+            data: { email, password, nickname }
+        })
     }, [ password, passwordCheck, term])
 
     return (
@@ -47,9 +56,9 @@ const Signup = () => {
             </Head>
             <Form onFinish={onSubmit}>
                 <div>
-                    <label htmlFor="user-id">아이디</label>
+                    <label htmlFor="user-email">이메일</label>
                     <br />
-                    <Input name="user-id" value={id} required onChange={onChangeId} />
+                    <Input name="user-email" type={email} value={email} required onChange={onChangeEmail} />
                 </div>
                 <div>
                     <label htmlFor="user-nickname">닉네임</label>
@@ -79,7 +88,7 @@ const Signup = () => {
                     { termError && <ErroMessage>약관에 동의하셔야 합니다.</ErroMessage>}
                 </div>
                 <div style={{ marginTop: 10}}>
-                    <Button type="primary" htmlType="submit">가입하기</Button>
+                    <Button type="primary" htmlType="submit" loading={signUpLoading}>가입하기</Button>
                 </div>
             </Form>
         </AppLayout>
